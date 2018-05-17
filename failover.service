@@ -1,0 +1,18 @@
+[Unit]
+Description=Hetzner Failover Automation
+After=network.target
+
+[Service]
+Type=simple
+User=failover
+Group=failover
+WorkingDirectory=/home/failover
+ExecStart=/home/failover/hetzner-failover.py -c "/home/failover/failover.config"
+SyslogIdentifier=failover
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
