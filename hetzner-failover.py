@@ -175,7 +175,7 @@ def main():
          if down == True: # Server is now up but was down before
             if retry <= 2: # Retry three times before marking the host as UP again
                retry += 1
-            else: # Host is back up. Change back failover IPs and send message to Stride
+            else: # Host is back up. Change back failover IPs
                log(0, host+" is back up. Switching Failover")
                loopcount = 0
                for ip in failips:
@@ -189,7 +189,7 @@ def main():
          if (retry <=2) and (down != True): # Retry three times before marking the Host as DOWN
             log(1, "Could not reach "+host+"! Retry "+str(retry))
             retry += 1
-         elif (down != True): # Host down after three retries. Switch Failover to backup and send message to Stride
+         elif (down != True): # Host down after three retries. Switch Failover to backup
             if isup(back_check_url): #check if the backup haproxy is available
                log(2, host+" is down! Switching failover")
                down = True
